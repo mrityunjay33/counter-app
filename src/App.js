@@ -2,46 +2,22 @@ import './App.css';
 import { useEffect, useState } from 'react';
 
 function App() {
-  const [time, setTime] = useState(0);
-  const [isStart, setIsStart] = useState(false);
+  const [count, setCount] = useState(0);
 
-    useEffect(() =>{
-      let interval;
-      if(isStart)
-      interval = setInterval(() =>{
-        setTime((prevTime)=> prevTime + 1);
-      }, 1000);
-
-      else clearInterval(interval);
-
-      return () => {
-      clearInterval(interval);
-    }
-    }, [isStart]);
-
-  const handleStartStop = () =>{
-    setIsStart(!isStart);
+  const handleIncrement = () => {
+    setCount((prevCount) => prevCount+1);
   }
-  const handleReset = () =>{
-    setTime(0);
-    setIsStart(false);
-  };
-
-  const formatTime = (timeInSeconds) => {
-    const minutes = Math.floor(timeInSeconds / 60);
-    const seconds = timeInSeconds % 60;
-    return `${minutes.toString().padStart(1, '0')}:${seconds.toString().padStart(2, '0')}`;
-  };
-
-
+  const handleDecrement = () => {
+    setCount((prevCount) => prevCount-1);
+  }
 
   return (
     <div className='container'>
       <h1>Stopwatch</h1>
-      <div>Time: {formatTime(time)}</div>
+      <div>Count: {(count)}</div>
       <br />
-      <button onClick={handleStartStop} >{!isStart ?  "Start": "Stop"}</button>
-      <button onClick={handleReset} >Reset</button>
+      <button onClick={handleIncrement} >Increment</button>
+      <button onClick={handleDecrement} >Decrement</button>
 
     </div>
   );
